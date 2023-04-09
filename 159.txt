@@ -3,18 +3,29 @@
 
 Задание 1
 У тебя есть база данных с поездками на такси. По плану на линию обслуживания должно было выйти 10550 автомобилей — эта цифра покрывает спрос пользователей. Команде поступило много жалоб: свободных автомобилей оказалось недостаточно. Сколько такси вышло на линии на самом деле? Информация о всех машинах на линии есть в таблице cabs.
-
 Запрос, которым удалось решить задачу:
-SELECT COUNT(DISTINCT vehicle_id) AS id FROM cabs;
+SELECT
+COUNT(DISTINCT vehicle_id) AS id
+FROM
+cabs;
 Ответ:
 Число автомобилей 5500
 
 Задание 2
 Посчитай количество автомобилей в каждой компании из таблицы cabs. Отсортируй значения по убыванию. Команда предполагает, что некоторые компании не вывели достаточно автомобилей на линию.
 Выведи те компании, в которых меньше 100 автомобилей. Поле с числом автомобилей назови cnt, поле с названием компании — company_name.
-
 Запрос, которым удалось решить задачу:
-SELECT company_name, COUNT(vehicle_id) AS cnt FROM cabs GROUP BY company_name HAVING COUNT(vehicle_id) < 100 ORDER BY cnt DESC;
+SELECT
+company_name,
+COUNT(vehicle_id) AS cnt
+FROM
+cabs
+GROUP BY
+company_name
+HAVING
+COUNT(vehicle_id) < 100
+ORDER BY
+cnt DESC;
 Ответ:
 Список компаний с числом автомобилей меньше 100 - 51 компания.
 
@@ -26,9 +37,16 @@ SELECT company_name, COUNT(vehicle_id) AS cnt FROM cabs GROUP BY company_name HA
 Полученное поле назови weather_conditions.
 В результирующей таблице должно быть два поля — дата и час (ts) и weather_conditions.
 Сделай выборку за период с 2017-11-05 00:00 по 2017-11-06 00:00.
-
 Запрос, которым удалось решить задачу:
-SELECT ts, CASE WHEN description LIKE '%rain%' OR description LIKE '%storm%' THEN 'bad' ELSE 'good' END AS weather_conditions FROM weather_records WHERE ts BETWEEN '2017-11-05 00:00' AND '2017-11-06 00:00';
+SELECT
+ts,
+CASE
+WHEN description LIKE '%rain%' OR description LIKE '%storm%' THEN 'bad' ELSE 'good'
+END AS weather_conditions
+FROM
+weather_records
+WHERE
+ts BETWEEN '2017-11-05 00:00' AND '2017-11-06 00:00';
 Ответ:
 Таблица с данными за указанный период. 
          ts          | weather_conditions
@@ -65,7 +83,6 @@ SELECT ts, CASE WHEN description LIKE '%rain%' OR description LIKE '%storm%' THE
 Чтобы определить, есть ли баг, нужно получить выборку с количеством поездок каждого таксопарка за 15 и 16 ноября 2017 года. 
 Выведи поле company_name. Поле с числом поездок назови trips_amount и выведи его.
 Результаты, полученные в поле trips_amount, отсортируй по убыванию.
-
 Запрос, которым удалось решить задачу:
 SELECT
 cabs.company_name,
